@@ -25,19 +25,19 @@ function statement (invoice, plays) {
         return plays[aPerformance.playID];
     }
 
-    let totalAmount = 0;
-    let volumeCredits = 0;
-    let result = `Statement for ${invoice.customer}\n`;
-    const format = new Intl.NumberFormat("en-US",
-        { style: "currency", currency: "USD",
-            minimumFractionDigits: 2 }).format;
-
     function volumeCreditsFor(perf) {
         let result = 0;
         result += Math.max(perf.audience - 30, 0);
         if ("comedy" === playFor(perf).type) result += Math.floor(perf.audience / 5);
         return result;
     }
+    
+    let totalAmount = 0;
+    let volumeCredits = 0;
+    let result = `Statement for ${invoice.customer}\n`;
+    const format = new Intl.NumberFormat("en-US",
+        { style: "currency", currency: "USD",
+            minimumFractionDigits: 2 }).format;
 
     for (let perf of invoice.performances) {
         volumeCredits += volumeCreditsFor(perf);
