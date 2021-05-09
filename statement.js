@@ -46,9 +46,9 @@ function statement (invoice, plays) {
         return volumeCredits;
     }
 
-    let totalAmount = 0;
     let result = `Statement for ${invoice.customer}\n`;
 
+    let totalAmount = 0;
     for (let perf of invoice.performances) {
 // print line for this order
         result += ` ${playFor(perf).name}: ${usd(amountFor(perf)/100)} (${perf.audience} seats)\n`
