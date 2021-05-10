@@ -1,4 +1,9 @@
 function statement (invoice, plays) {
+    const statementData = {};
+    return renderPlainText(statementData, invoice, plays);
+}
+
+function renderPlainText (data, invoice, plays) {
     function amountFor(perf) {
         let result = 0;
         switch (playFor(perf).type) {
