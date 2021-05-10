@@ -39,7 +39,7 @@ function statement (invoice, plays) {
 
 }
 
-function renderPlainText (data, plays) {
+function renderPlainText (data) {
     function volumeCreditsFor(aPerformance) {
         let result = 0;
         result += Math.max(aPerformance.audience - 30, 0);
@@ -64,7 +64,7 @@ function renderPlainText (data, plays) {
     function totalAmount() {
         let result = 0;
         for (let perf of data.performances) {
-            result += perf.amount(perf);
+            result += perf.amount;
         }
         return result;
     }
