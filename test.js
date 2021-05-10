@@ -1,5 +1,7 @@
-const statement = require('./statement');
-console.log(statement.statement(  {
+const statement = require('./statement').statement;
+const htmlStatement = require('./statement').htmlStatement;
+
+console.log(htmlStatement(  {
         "customer": "BigCo",
         "performances": [
             {
