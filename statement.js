@@ -1,4 +1,4 @@
-function statement (invoice, plays) {
+function createStatementData (invoice, plays) {
     const statementData = {};
     statementData.customer = invoice.customer;
     statementData.performances = invoice.performances.map(enrichPerformance);
@@ -47,20 +47,14 @@ function statement (invoice, plays) {
         return result;
     }
 
-    function totalVolumeCredits(data) {
-        let volumeCredits = 0;
-        for (let perf of data.performances) {
-            volumeCredits += perf.volumeCredits;
-        }
-        return volumeCredits;
+    function totalAmount(data) {
+        return data.performances
+            .reduce((total, p) => total + p.amount, 0);
     }
 
-    function totalAmount(data) {
-        let result = 0;
-        for (let perf of data.performances) {
-            result += perf.amount;
-        }
-        return result;
+    function totalVolumeCredits(data) {
+        return data.performances
+            .reduce((total, p) => total + p.volumeCredits, 0);
     }
 }
 
@@ -82,7 +76,7 @@ function renderPlainText (data) {
     return result;
 }
 
-console.log(statement(  {
+console.log(createStatementData(  {
     "customer": "BigCo",
     "performances": [
         {
