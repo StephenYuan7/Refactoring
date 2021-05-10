@@ -57,3 +57,7 @@ function createStatementData (invoice, plays) {
             .reduce((total, p) => total + p.volumeCredits, 0);
     }
 }
+
+module.exports = {
+    createStatementData
+}

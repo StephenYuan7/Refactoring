@@ -1,7 +1,8 @@
-import createStatementData from './createStatementData.js';
+// import createStatementData from './createStatementData.js';
+var createStatementData = require('./createStatementData');
 
 function statement (invoice, plays) {
-    return renderPlainText(createStatementData(invoice, plays));
+    return renderPlainText(createStatementData.createStatementData(invoice, plays));
 }
 
 function renderPlainText (data) {
