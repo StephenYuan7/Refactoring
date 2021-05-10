@@ -7,15 +7,14 @@ function statement (invoice, plays) {
     function enrichPerformance(aPerformance) {
         const result = Object.assign({}, aPerformance);
         result.play = playFor(result);
+        result.amount = amountFor(result);
         return result;
     }
 
     function playFor(aPerformance) {
         return plays[aPerformance.playID];
     }
-}
 
-function renderPlainText (data, plays) {
     function amountFor(aPerformance) {
         let result = 0;
         switch (aPerformance.play.type) {
@@ -38,6 +37,9 @@ function renderPlainText (data, plays) {
         return result;
     }
 
+}
+
+function renderPlainText (data, plays) {
     function volumeCreditsFor(aPerformance) {
         let result = 0;
         result += Math.max(aPerformance.audience - 30, 0);
@@ -62,14 +64,14 @@ function renderPlainText (data, plays) {
     function totalAmount() {
         let result = 0;
         for (let perf of data.performances) {
-            result += amountFor(perf);
+            result += perf.amount(perf);
         }
         return result;
     }
     let result = `Statement for ${data.customer}\n`;
     for (let perf of data.performances) {
 // print line for this order
-        result += ` ${perf.play.name}: ${usd(amountFor(perf) / 100)} (${perf.audience} seats)\n`
+        result += ` ${perf.play.name}: ${usd(perf.amount / 100)} (${perf.audience} seats)\n`
         ;
     }
     result += `Amount owed is ${usd(totalAmount()/100)}\n`;
